@@ -1,0 +1,21 @@
+---
+layout: base.njk
+title: 标签
+description: 按主题浏览文章
+pageType: tag
+pageSubtitle: 把相近的念头放在一起
+permalink: /tags/
+---
+<section id="page" class="page-card tags-page">
+  {% if collections.tagList.length == 0 %}
+  <div class="empty-posts"><h2>暂无标签</h2><p>写下第一篇文章后，标签会自动出现在这里。</p></div>
+  {% else %}
+  <div class="tag-cloud-list">{% for tag in collections.tagList %}<a id="{{ tag }}" href="#{{ tag }}" style="font-size: {{ 1.5 + loop.index0 * 0.25 }}em">{{ tag }}</a>{% endfor %}</div>
+  <div class="tag-sections">
+    {% for tag in collections.tagList %}
+    <section><h2>{{ tag }}</h2>{% for post in collections.posts %}{% if tag in post.data.tags %}<a href="{{ post.url | url }}"><span>{{ post.date | dateCN }}</span>{{ post.data.title }}</a>{% endif %}{% endfor %}</section>
+    {% endfor %}
+  </div>
+  {% endif %}
+</section>
+{% include "sidebar.njk" %}

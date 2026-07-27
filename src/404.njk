@@ -1,0 +1,12 @@
+---
+layout: base.njk
+title: 页面走丢了
+description: 没有找到这个页面
+pageType: error
+permalink: /404.html
+eleventyExcludeFromCollections: true
+---
+<section class="error-content page-card">
+  <div class="error-img"><img src="{{ '/img/404.png' | url }}" alt="404"></div>
+  <div class="error-info"><h2>404</h2><p>页面走丢了，但回家的路还在。</p><a class="button-primary" href="{{ '/' | url }}">返回首页</a></div>
+</section>

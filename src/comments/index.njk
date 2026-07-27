@@ -1,0 +1,24 @@
+---
+layout: base.njk
+title: 留言板
+description: 有什么想说的，都可以留在这里
+pageType: comments
+pageSubtitle: 自动书记人偶竭诚为您服务
+permalink: /comments/
+---
+<section id="page" class="page-card comments-page">
+  <div class="container" id="article-container">
+    <div class="envelope" aria-label="来自深白色的留言">
+      <div class="envelope-photo"><img src="{{ '/img/cat.jpg' | url }}" alt="猫咪" loading="eager"></div>
+      <div class="envelope-paper">
+        <p class="letter-kicker">来自深白色的留言</p>
+        <h2>有什么想问的？</h2>
+        <p>有什么想说的？有什么想吐槽的？<br>哪怕是有什么想吃的，都可以告诉我哦~</p>
+        <div class="letter-line"></div>
+        <small>自动书记人偶竭诚为您服务！</small>
+      </div>
+    </div>
+  </div>
+  {% include "comments.njk" %}
+</section>
+{% include "sidebar.njk" %}

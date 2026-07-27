@@ -1,0 +1,66 @@
+{% from "icon.njk" import icon %}
+<aside class="aside-content" id="aside-content" aria-label="站点信息">
+  <section class="card-widget card-info text-center">
+    <div class="avatar-img"><img src="{{ '/img/pic.jpg' | url }}" alt="{{ site.author }}的头像" width="110" height="110"></div>
+    <div class="author-info-name">{{ site.author }}</div>
+    <div class="author-info-description">{{ site.description }}</div>
+    <div class="site-data">
+      <a href="{{ '/archives/' | url }}"><span class="headline">文章</span><strong class="length-num">{{ collections.posts | length }}</strong></a>
+      <a href="{{ '/tags/' | url }}"><span class="headline">标签</span><strong class="length-num">{{ collections.tagList | length }}</strong></a>
+      <a href="{{ '/categories/' | url }}"><span class="headline">分类</span><strong class="length-num">{% if collections.posts.length %}1{% else %}0{% endif %}</strong></a>
+    </div>
+    <a id="card-info-btn" href="{{ site.github }}" target="_blank" rel="noopener noreferrer">{{ icon("github") }}<span>Follow Me</span></a>
+    <div class="card-info-social-icons">
+      <a class="social-icon" href="{{ site.github }}" target="_blank" rel="noopener noreferrer" aria-label="GitHub">{{ icon("github") }}</a>
+      <a class="social-icon" href="mailto:{{ site.email }}" aria-label="Email">{{ icon("mail") }}</a>
+    </div>
+  </section>
+
+  <section class="card-widget card-announcement">
+    <div class="item-headline">{{ icon("bell") }}<span>公告</span></div>
+    <p>shenbaise in the blog!</p>
+    <img class="announcement-gif" src="{{ '/img/zshz.gif' | url }}" alt="诗和远方" loading="lazy">
+  </section>
+
+  <div class="sticky_layout">
+    <section class="card-widget card-recent-post">
+      <div class="item-headline">{{ icon("clock") }}<span>最新文章</span></div>
+      <div class="aside-list">
+        {% for post in collections.posts | head(5) %}
+        <article class="aside-list-item">
+          <a class="thumbnail" href="{{ post.url | url }}"><img src="{{ post.data.cover | url }}" alt="" loading="lazy"></a>
+          <div class="content"><a class="title" href="{{ post.url | url }}">{{ post.data.title }}</a><time datetime="{{ post.date }}">{{ post.date | dateCN }}</time></div>
+        </article>
+        {% endfor %}
+      </div>
+    </section>
+
+    <section class="card-widget card-tags">
+      <div class="item-headline">{{ icon("tag") }}<span>标签</span></div>
+      <div class="card-tag-cloud"><a href="{{ '/tags/#随笔' | url }}">随笔</a><a href="{{ '/tags/#博客' | url }}">博客</a></div>
+    </section>
+
+    <section class="card-widget card-archives">
+      <div class="item-headline">{{ icon("book") }}<span>归档</span></div>
+      <ul class="card-archive-list"><li><a href="{{ '/archives/' | url }}"><span>七月 2026</span><strong>{{ collections.posts | length }}</strong></a></li></ul>
+    </section>
+
+    <section class="card-widget card-poem" id="card-poem">
+      <div class="item-headline">{{ icon("book") }}<span>今日诗词</span></div>
+      <blockquote>
+        <span class="poem-line">白云满地江湖阔，</span>
+        <span class="poem-line">著我逍遥自在行。</span>
+      </blockquote>
+      <cite><span>深白色</span></cite>
+    </section>
+
+    <section class="card-widget card-webinfo">
+      <div class="item-headline">{{ icon("chart") }}<span>网站信息</span></div>
+      <div class="webinfo">
+        <div class="webinfo-item"><span>文章数目 :</span><strong>{{ collections.posts | length }}</strong></div>
+        <div class="webinfo-item"><span>运行时间 :</span><strong id="site-runtime">计算中</strong></div>
+        <div class="webinfo-item"><span>最后更新 :</span><strong>2026-07-21</strong></div>
+      </div>
+    </section>
+  </div>
+</aside>

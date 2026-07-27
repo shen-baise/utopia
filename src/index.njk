@@ -1,0 +1,33 @@
+---
+layout: base.njk
+title: 深白色的赛博产房
+description: 等不到你，成为我最闪亮的星星
+home: true
+permalink: /
+---
+{% from "icon.njk" import icon %}
+<section class="recent-posts nc" id="recent-posts" aria-label="最新文章">
+  <div class="recent-post-items">
+    {% if collections.posts.length == 0 %}
+    <div class="empty-posts page-card">
+      <h2>还没有文章</h2>
+      <p>这里会放新的随笔、记录和碎碎念。下一篇文章写好后，它会自动出现在首页。</p>
+    </div>
+    {% endif %}
+    {% for post in collections.posts %}
+    <article class="recent-post-item">
+      <div class="post_cover"><a href="{{ post.url | url }}" title="{{ post.data.title }}"><img class="post-bg" src="{{ post.data.cover | url }}" alt="{{ post.data.title }}" width="720" height="430" loading="{% if loop.index <= 2 %}eager{% else %}lazy{% endif %}"></a></div>
+      <div class="recent-post-info">
+        <a class="article-title" href="{{ post.url | url }}">{{ post.data.title }}</a>
+        <div class="article-meta-wrap">
+          <span class="post-meta-date">{{ icon("calendar") }}<span class="article-meta-label">发表于</span><time datetime="{{ post.date }}">{{ post.date | dateCN }}</time></span>
+          <span class="article-meta tags"><span class="article-meta-separator">|</span>{{ icon("tag") }}{% for tag in post.data.tags %}<a href="{{ ('/tags/#' + tag) | url }}">{{ tag }}</a>{% if not loop.last %} · {% endif %}{% endfor %}</span>
+        </div>
+        <p class="content">{{ post.data.description }}</p>
+      </div>
+    </article>
+    {% endfor %}
+  </div>
+  <nav id="pagination" aria-label="分页"><span class="page-number current">1</span></nav>
+</section>
+{% include "sidebar.njk" %}

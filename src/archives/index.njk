@@ -1,0 +1,26 @@
+---
+layout: base.njk
+title: 归档
+description: 所有文章的时间线
+pageType: archive
+pageSubtitle: 一页页翻过曾经的日子
+permalink: /archives/
+---
+{% from "icon.njk" import icon %}
+<section id="archive" class="page-card">
+  <div class="article-sort">
+    <div class="article-sort-title">文章总览 - {{ collections.posts | length }}</div>
+    {% if collections.posts.length == 0 %}
+    <div class="empty-posts"><h2>暂无文章</h2><p>以后写下的文章会按时间线整理在这里。</p></div>
+    {% else %}
+    <div class="article-sort-item year"><strong>2026</strong></div>
+    {% for post in collections.posts %}
+    <article class="article-sort-item">
+      <a class="article-sort-item-img" href="{{ post.url | url }}"><img src="{{ post.data.cover | url }}" alt="" loading="lazy"></a>
+      <div class="article-sort-item-info"><time datetime="{{ post.date }}">{{ icon("calendar") }} {{ post.date | dateCN }}</time><a class="article-sort-item-title" href="{{ post.url | url }}">{{ post.data.title }}</a></div>
+    </article>
+    {% endfor %}
+    {% endif %}
+  </div>
+</section>
+{% include "sidebar.njk" %}

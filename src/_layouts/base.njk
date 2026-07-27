@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="zh-CN" data-theme="light">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#ffffff">
+  <meta name="description" content="{{ description }}">
+  <meta name="author" content="{{ site.author }}">
+  <meta property="og:title" content="{{ title }}">
+  <meta property="og:description" content="{{ description }}">
+  <meta property="og:image" content="{{ site.url }}/img/pic.jpg">
+  <title>{% if title != site.title %}{{ title }} | {% endif %}{{ site.title }}</title>
+  <link id="site-favicon" rel="shortcut icon" href="{{ '/img/pic.jpg' | url }}">
+  <link rel="stylesheet" href="{{ '/assets/css/butterfly.css' | url }}">
+  <link rel="stylesheet" href="{{ '/assets/css/site.css' | url }}">
+  <script>
+    (() => {
+      const saved = localStorage.getItem('deepwhite-theme');
+      const theme = saved || (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+      document.documentElement.dataset.theme = theme;
+      document.querySelector('meta[name="theme-color"]').content = theme === 'dark' ? '#0d0d0d' : '#ffffff';
+    })();
+  </script>
+</head>
+<body data-page="{% if home %}home{% elseif pageType %}{{ pageType }}{% else %}page{% endif %}" data-base="{{ '/' | url }}">
+  {% include "svg-sprite.njk" %}
+  <canvas id="snow-canvas" aria-hidden="true"></canvas>
+  <div id="web_bg" aria-hidden="true"></div>
+
+  <div id="sidebar">
+    <button id="menu-mask" type="button" aria-label="关闭菜单"></button>
+    <aside id="sidebar-menus" aria-label="移动端导航">
+      <div class="avatar-img text-center"><img src="{{ '/img/pic.jpg' | url }}" alt="{{ site.author }}" width="110" height="110"></div>
+      <div class="site-data">
+        <a href="{{ '/archives/' | url }}"><span class="headline">文章</span><strong>{{ collections.posts | length }}</strong></a>
+        <a href="{{ '/tags/' | url }}"><span class="headline">标签</span><strong>{{ collections.tagList | length }}</strong></a>
+        <a href="{{ '/categories/' | url }}"><span class="headline">分类</span><strong>{% if collections.posts.length %}1{% else %}0{% endif %}</strong></a>
+      </div>
+      <nav class="menus_items">
+        {% from "icon.njk" import icon %}
+        {% for item in navigation %}<a class="site-page" href="{{ item.url | url }}">{{ icon(item.icon) }}<span>{{ item.label }}</span></a>{% endfor %}
+      </nav>
+    </aside>
+  </div>
+
+  <div class="page" id="body-wrap">
+    <header id="page-header" class="{% if home %}full_page{% else %}not-home-page {{ pageType or 'page' }}-bg{% endif %}"{% if pageType == 'post' and cover %} style="--post-cover: url('{{ cover | url }}')"{% endif %}>
+      <nav id="nav" class="show" aria-label="主导航">
+        <span id="blog-info"><a class="nav-site-title" href="{{ '/' | url }}"><img class="site-icon" src="{{ '/img/pic.jpg' | url }}" alt="" width="36" height="36"><span class="site-name">{{ site.title }}</span></a></span>
+        <div id="menus">
+          <div class="menus_items">
+            {% for item in navigation %}<a class="site-page{% if page.url == item.url %} active{% endif %}" href="{{ item.url | url }}">{{ icon(item.icon) }}<span>{{ item.label }}</span></a>{% endfor %}
+            <button class="site-page icon-command" id="search-button" type="button" aria-label="搜索" title="搜索">{{ icon("search") }}</button>
+          </div>
+          <button id="toggle-menu" class="site-page icon-command" type="button" aria-label="打开菜单" aria-expanded="false">{{ icon("menu") }}</button>
+        </div>
+      </nav>
+      {% if home %}
+      <div id="site-info">
+        <h1 id="site-title">{{ site.title }}</h1>
+        <div id="site-subtitle"><span id="subtitle" data-lines='{{ site.subtitles | json }}'></span><span class="typed-cursor" aria-hidden="true">|</span></div>
+        <div id="site_social_icons">
+          <a class="social-icon" href="{{ site.github }}" target="_blank" rel="noopener noreferrer" aria-label="GitHub">{{ icon("github") }}</a>
+          <a class="social-icon" href="mailto:{{ site.email }}" aria-label="Email">{{ icon("mail") }}</a>
+        </div>
+      </div>
+      <button id="scroll-down" type="button" aria-label="向下滚动">{{ icon("down", "scroll-down-effects") }}</button>
+      {% else %}
+      <div id="page-site-info"><h1 id="site-title">{{ title }}</h1>{% if pageSubtitle %}<p class="page-subtitle">{{ pageSubtitle }}</p>{% endif %}</div>
+      {% endif %}
+    </header>
+
+    <main class="layout" id="content-inner">{{ content | safe }}</main>
+
+    <footer id="footer">
+      <div id="footer-wrap">
+        <div class="copyright">© {{ site.startedYear }} - <span id="current-year"></span> By {{ site.author }}</div>
+        <div class="framework-info"><span>框架 </span><a href="https://www.11ty.dev/" target="_blank" rel="noopener noreferrer">Eleventy</a></div>
+        <div class="footer_custom_text">I wish you to become your own sun, no need to rely on who's light.</div>
+      </div>
+    </footer>
+  </div>
+
+  <div id="rightside" aria-label="快捷工具">
+    <button id="darkmode" type="button" title="日间和夜间模式切换" aria-label="日间和夜间模式切换">{{ icon("moon") }}</button>
+    <button id="go-up" type="button" title="回到顶部" aria-label="回到顶部"><span class="scroll-percent">0%</span>{{ icon("up") }}</button>
+    <button id="go-down" type="button" title="直达底部" aria-label="直达底部">{{ icon("down") }}</button>
+  </div>
+  <div id="neko-scroll" aria-hidden="true"><button id="neko-cat" type="button" tabindex="-1" aria-label="回到顶部"></button></div>
+
+  <div id="local-search" class="search-modal" hidden>
+    <button id="search-mask" type="button" aria-label="关闭搜索"></button>
+    <section class="search-dialog" role="dialog" aria-modal="true" aria-labelledby="search-title">
+      <header class="search-nav"><h2 id="search-title">搜索</h2><button class="search-close-button" type="button" aria-label="关闭搜索">{{ icon("close") }}<span>关闭</span></button></header>
+      <label class="search-box"><span class="sr-only">搜索文章</span>{{ icon("search") }}<input id="search-input" type="search" placeholder="搜索文章..." autocomplete="off"></label>
+      <p id="search-stats" aria-live="polite">输入关键词开始搜索</p>
+      <div id="search-results"></div>
+    </section>
+  </div>
+
+  <div id="toast" role="status" aria-live="polite"></div>
+  <script src="{{ '/assets/js/site.js' | url }}" defer></script>
+</body>
+</html>

@@ -1,0 +1,19 @@
+[
+  {
+    "group": "友人账",
+    "description": "朋友一生一起走，那些日子不再有~~",
+    "items": [
+      { "name": "Yelia", "url": "https://yelia.fun", "avatar": "/img/cat.jpg", "description": "人坤" },
+      { "name": "Pomni", "url": "https://pomni.fun/", "avatar": "/img/butterfly-icon.png", "description": "神" }
+    ]
+  },
+  {
+    "group": "网站",
+    "description": "值得推荐的网站",
+    "items": [
+      { "name": "YouTube", "url": "https://www.youtube.com/", "avatar": "/img/youtube.png", "description": "江湖人称小B站" },
+      { "name": "GitHub", "url": "https://github.com/", "avatar": "/img/github.png", "description": "代码与灵感的仓库" },
+      { "name": "B站", "url": "https://www.bilibili.com/", "avatar": "/img/bilibili.png", "description": "江湖人称小油管" }
+    ]
+  }
+]

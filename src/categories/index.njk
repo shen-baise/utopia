@@ -1,0 +1,18 @@
+---
+layout: base.njk
+title: 分类
+description: 博客文章分类
+pageType: category
+pageSubtitle: 所有内容都从这里生长
+permalink: /categories/
+---
+<section id="page" class="page-card categories-page">
+  {% if collections.posts.length == 0 %}
+  <div class="empty-posts"><h2>暂无分类</h2><p>第一篇文章发布后，分类会自动开始归档。</p></div>
+  {% else %}
+  <h2>生活与创作</h2>
+  <p>共 {{ collections.posts | length }} 篇文章</p>
+  <div class="category-posts">{% for post in collections.posts %}<a href="{{ post.url | url }}"><span>{{ post.date | dateCN }}</span>{{ post.data.title }}</a>{% endfor %}</div>
+  {% endif %}
+</section>
+{% include "sidebar.njk" %}

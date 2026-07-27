@@ -1,0 +1,25 @@
+---
+layout: base.njk
+title: 关于
+description: 关于深白色与这间赛博产房
+pageType: about
+pageSubtitle: 等不到你，成为我最闪亮的星星
+permalink: /about/
+---
+<section id="page" class="page-card">
+  <div class="container about-page" id="article-container">
+    <div class="about-profile">
+      <img src="{{ '/img/pic.jpg' | url }}" alt="深白色" width="150" height="150">
+      <div><p class="about-eyebrow">HELLO, WORLD</p><h2>你好，我是深白色</h2><p>欢迎来到我的赛博产房。这里记录生活、音乐、代码，以及偶尔冒出来的奇怪想法。</p></div>
+    </div>
+    <h2>关于本站</h2>
+    <p>这是旧博客的重建版本。视觉上保留了原来的 Butterfly 卡片布局、动画背景、字体与配色，底层改成更容易迁移的静态博客工程。</p>
+    <div class="about-grid">
+      <div><strong>静态生成</strong><span>Eleventy</span></div>
+      <div><strong>代码托管</strong><span>GitHub Pages</span></div>
+      <div><strong>评论系统</strong><span>Giscus</span></div>
+      <div><strong>内容格式</strong><span>Markdown</span></div>
+    </div>
+  </div>
+</section>
+{% include "sidebar.njk" %}

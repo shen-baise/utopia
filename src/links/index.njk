@@ -1,0 +1,26 @@
+---
+layout: base.njk
+title: 友链
+description: 朋友们与值得收藏的网站
+pageType: link
+pageSubtitle: 朋友一生一起走，那些日子不再有
+permalink: /link/
+---
+<section id="page" class="page-card">
+  <div class="container flink" id="article-container">
+    {% for group in friends %}
+    <h2 id="{{ group.group }}">{{ group.group }}</h2>
+    <p class="flink-desc">{{ group.description }}</p>
+    <div class="flink-list">
+      {% for friend in group.items %}
+      <article class="flink-list-item"><a href="{{ friend.url }}" target="_blank" rel="noopener noreferrer">
+        <div class="flink-item-icon"><img src="{{ friend.avatar | url }}" data-fallback="{{ '/img/dtcat.png' | url }}" alt="" loading="lazy"></div>
+        <div class="flink-item-name">{{ friend.name }}</div>
+        <div class="flink-item-desc">{{ friend.description }}</div>
+      </a></article>
+      {% endfor %}
+    </div>
+    {% endfor %}
+  </div>
+</section>
+{% include "sidebar.njk" %}
