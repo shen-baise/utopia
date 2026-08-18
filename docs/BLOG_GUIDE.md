@@ -165,7 +165,7 @@ git push
 src/_data/site.json
 ```
 
-如果仓库从 `shen-baise.github.io` 换成 `utopia`，Giscus 评论配置也要重新生成。需要在 `shen-baise/utopia` 仓库中开启 Discussions、安装 Giscus App，然后把新的 `repoId`、`categoryId` 写回 `site.json`。
+评论区现在已接入 Giscus，当前仓库使用的是 `shen-baise/utopia`，讨论分类是 `Announcements`。如果以后更换仓库或重新创建评论区，需要在新仓库里开启 Discussions、重新获取 `repoId` 和 `categoryId`，再写回 `src/_data/site.json`。
 
 ## 常用命令
 

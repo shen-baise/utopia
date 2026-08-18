@@ -48,15 +48,15 @@ test("mobile navigation and search are usable", async ({ page }) => {
 
 test("article listing and empty taxonomy states are clear", async ({ page }) => {
   await page.goto("/", { waitUntil: "domcontentloaded" });
-  await expect(page.locator(".recent-post-item")).toHaveCount(3);
+  await expect(page.locator(".recent-post-item")).toHaveCount(4);
   await expect(page.locator("a.article-title").first()).toBeVisible();
   await page.goto("/tags/", { waitUntil: "domcontentloaded" });
   await expect(page.locator(".tag-cloud-list a")).toHaveCount(2);
   await page.goto("/categories/", { waitUntil: "domcontentloaded" });
-  await expect(page.locator(".category-posts a")).toHaveCount(3);
+  await expect(page.locator(".category-posts a")).toHaveCount(4);
 });
 
-for (const path of ["/posts/graph-engineering/", "/posts/long-horizon-agents/", "/posts/reliable-self-evolving-agents/"]) {
+for (const path of ["/posts/graph-engineering/", "/posts/long-horizon-agents/", "/posts/reliable-self-evolving-agents/", "/posts/loop-engineering/"]) {
   test(`${path} renders article images`, async ({ page }) => {
     await page.goto(path, { waitUntil: "domcontentloaded" });
     const brokenImages = await page.locator("article img").evaluateAll((images) =>
@@ -80,5 +80,5 @@ test("theme preference survives reload", async ({ page }) => {
 
 test("comments show a clear setup state", async ({ page }) => {
   await page.goto("/comments/", { waitUntil: "domcontentloaded" });
-  await expect(page.locator("#post-comment .comment-fallback")).toContainText("评论区等待配置");
+  await expect(page.locator("iframe.giscus-frame")).toBeVisible();
 });

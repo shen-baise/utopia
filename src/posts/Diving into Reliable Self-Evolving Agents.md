@@ -1,6 +1,6 @@
 ---
 layout: post.njk
-title: Diving into Reliable Self-Evolving Agents综述
+title: Diving into Reliable Self-Evolving Agents
 description: 这篇综述论文深入探讨了当前大语言模型（LLM）前沿领域的一个关键议题：自进化 Agent（Self-Evolving Agents）。文章突破了以往单纯按算法、功能或训练阶段分类的局限，提出了一个基于“自进化深度（Self-Evolution Depth）”的五级分类体系（L0-L4），并创造性地引入了“可靠性阶梯（Reliability Ladder）”来解决自进化过程中的失控风险。
 date: 2026-08-18
 cover: /img/eba.jpg
