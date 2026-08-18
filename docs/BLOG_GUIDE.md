@@ -83,6 +83,28 @@ permalink: /posts/a-new-day/
 src/img/a-new-day.jpg
 ```
 
+正文图片路径：
+
+文章页面会生成在 `posts/文章地址/` 目录下，因此正文中的图片要使用相对路径。假设图片位于 `src/img/blog/example.png`，Markdown 写法是：
+
+```markdown
+![示例图片](../../img/blog/example.png)
+```
+
+论文类图片同理：
+
+```markdown
+![论文配图](../../img/paper/example.png)
+```
+
+不要使用当前电脑上的 Windows 绝对路径：
+
+```text
+D:\Desktop\Junior\shen-baise.github.io\utopia\src\img\blog\example.png
+```
+
+也不要在正文里随意写 `/img/example.png`。项目部署在 `/utopia/` 子路径下时，这种根路径可能会指向个人主页而不是博客。封面图仍按 front matter 使用 `/img/...`，站点模板会自动处理项目路径。
+
 本地预览：
 
 ```powershell
