@@ -37,7 +37,11 @@
 
     <section class="card-widget card-tags">
       <div class="item-headline">{{ icon("tag") }}<span>标签</span></div>
-      <div class="card-tag-cloud"><a href="{{ '/tags/#随笔' | url }}">随笔</a><a href="{{ '/tags/#博客' | url }}">博客</a></div>
+      {% if collections.tagList.length %}
+      <div class="card-tag-cloud">{% for tag in collections.tagList %}<a href="{{ ('/tags/#' + tag) | url }}">{{ tag }}</a>{% endfor %}</div>
+      {% else %}
+      <p class="comment-fallback">暂无标签</p>
+      {% endif %}
     </section>
 
     <section class="card-widget card-archives">

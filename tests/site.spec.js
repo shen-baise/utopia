@@ -66,6 +66,12 @@ for (const path of ["/posts/graph-engineering/", "/posts/long-horizon-agents/", 
   });
 }
 
+test("math formulas are rendered", async ({ page }) => {
+  await page.goto("/posts/reliable-self-evolving-agents/", { waitUntil: "domcontentloaded" });
+  await page.waitForFunction(() => document.querySelectorAll("mjx-container").length > 0);
+  expect(await page.locator("mjx-container").count()).toBeGreaterThan(0);
+});
+
 test("theme preference survives reload", async ({ page }) => {
   await page.goto("/", { waitUntil: "domcontentloaded" });
   const before = await page.locator("html").getAttribute("data-theme");

@@ -237,6 +237,10 @@
     setTimeout(() => heart.remove(), 800);
   });
 
+  if (window.MathJax?.typesetPromise) {
+    window.MathJax.typesetPromise();
+  }
+
   const canvas = $("#snow-canvas");
   if (canvas && innerWidth > 768 && !matchMedia("(prefers-reduced-motion: reduce)").matches) {
     const context = canvas.getContext("2d");

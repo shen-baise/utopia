@@ -21,6 +21,18 @@
       document.querySelector('meta[name="theme-color"]').content = theme === 'dark' ? '#0d0d0d' : '#ffffff';
     })();
   </script>
+  <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [["$", "$"], ["\\(", "\\)"]],
+        displayMath: [["$$", "$$"], ["\\[", "\\]"]]
+      },
+      options: {
+        skipHtmlTags: ["script", "noscript", "style", "textarea", "pre", "code"]
+      }
+    };
+  </script>
+  <script defer src="{{ '/vendor/mathjax/es5/tex-mml-chtml.js' | url }}"></script>
 </head>
 <body data-page="{% if home %}home{% elseif pageType %}{{ pageType }}{% else %}page{% endif %}" data-base="{{ '/' | url }}">
   {% include "svg-sprite.njk" %}

@@ -14,6 +14,7 @@ export default function (eleventyConfig) {
   eleventyConfig.addPassthroughCopy({ "src/img": "img" });
   eleventyConfig.addPassthroughCopy({ "src/fonts": "fonts" });
   eleventyConfig.addPassthroughCopy({ "src/cursors": "cursors" });
+  eleventyConfig.addPassthroughCopy({ "node_modules/mathjax-full/es5": "vendor/mathjax/es5" });
 
   eleventyConfig.addFilter("dateCN", (value) => {
     const date = new Date(value);
